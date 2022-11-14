@@ -16,7 +16,7 @@ import Home from './Pages/Home';
 
 
 function App() {
-  const { setUser } = useContext(AuthContext)
+  const {user, setUser } = useContext(AuthContext)
   const { firebase } = useContext(FirebaseContext)
   useEffect(() => {
     firebase.auth().onAuthStateChanged((user) => {
@@ -36,8 +36,10 @@ function App() {
           <Route path='/login'>
             <LoginPage />
           </Route>
-          <Route path='/create'>
-            <CreatePage />
+          
+          <Route  path='/create'>
+          {user ? <CreatePage /> :<LoginPage /> }
+            
           </Route>
           <Route path='/view'>
             <ViewPost />
